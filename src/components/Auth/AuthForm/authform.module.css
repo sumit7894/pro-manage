@@ -1,0 +1,91 @@
+.main__auth
+{
+    display: flex;
+    height: 100vh;
+    width: 40vw;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Open Sans';
+    justify-content: center;
+}
+.auth__heading
+{
+    color: #343434;
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+}
+
+.input__container
+{
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    border: 1.3px solid #D0D0D0;
+    width: 30vw;
+    border-radius: 11.03px;
+}
+.input__error
+{
+    font-size: 0.9rem;
+    width: 90%;
+    height: 1.2rem;
+    color: red;
+    text-align: start;
+    /* background-color: #17A2B8; */
+}
+.input__container img
+{
+    height: 1.4rem;
+    padding: 5px;
+}
+
+.input__container input
+{
+    height: 1.2rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #828282;
+    padding: 2px;
+    font-size: 1.05rem;
+}
+.submit__button
+{
+    background-color: #17A2B8;
+    height: 2.2rem;
+    width: 30vw;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.submit__button:hover
+{
+    background-color: white;
+    border: 1px solid #17a2bb;
+    cursor: pointer;
+    color: #17A2B8;
+}
+.bottom__heading
+{
+    color: #828282;
+}
+.toggle__button
+{
+    height: 2.2rem;
+    width: 30vw;
+    background-color: white;
+    border: 1px solid #17a2bb;
+    cursor: pointer;
+    color: #17A2B8;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+.toggle__button:hover
+{
+    background-color: #17A2B8;
+    border: 1px solid #17A2B8;
+    color: white;
+}
