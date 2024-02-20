@@ -1,10 +1,22 @@
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Auth from './pages/Auth/Auth';
+import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {
+  const appRouter = createBrowserRouter([
+    {
+      path:'/',
+      element:<Auth/>
+    },
+    {
+      path:'dashboard',
+      element:<Dashboard/>
+    }
+  ])
   return (
     <div className="App">
-      <Auth/>
+      <RouterProvider router={appRouter}/>
     </div>
   );
 }
