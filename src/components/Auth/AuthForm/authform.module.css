@@ -11,8 +11,9 @@
 .auth__heading
 {
     color: #343434;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     margin-bottom: 4rem;
+    font-weight: 510;
 }
 
 .input__container
