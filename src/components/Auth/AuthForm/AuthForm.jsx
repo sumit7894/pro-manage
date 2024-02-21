@@ -71,6 +71,7 @@ const AuthForm = () => {
     try {
       const response = await axios.post(`${BASE_URL}/login`,data);
       toast.success("Login successful!")
+      localStorage.setItem('email', email);
       navigate('/dashboard');
     } catch (error) {
       console.log(error);

@@ -24,15 +24,22 @@ export const checkEmail =(email)=>{
     }
 }
 export const checkPassword =(password)=>{
-    if(password.trim().length <5)
+    if(!password?.trim())
     {
-        return "Password must contain at least 5 characters long without spaces"
+        return "Invalid password"
+    }
+    if(password.length <5)
+    {
+        return "Password must contain at least 5 characters"
     }else
     {
         return "";
     }
 }
 export const checkConfirmPassword = (password,confirmPassword)=>{
+    if(!confirmPassword?.trim()){
+        return "Invalid password"
+    }
     if(password !== confirmPassword)
     {
         return "Passwords don't match"
