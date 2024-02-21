@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Auth from './pages/Auth/Auth';
 import Dashboard from './pages/dashboard/Dashboard';
+import { Provider } from './context/TaskContext';
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -16,7 +17,9 @@ function App() {
   ])
   return (
     <div className="App">
+      <Provider>
       <RouterProvider router={appRouter}/>
+      </Provider>
     </div>
   );
 }

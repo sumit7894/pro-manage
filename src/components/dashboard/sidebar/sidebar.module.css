@@ -1,0 +1,66 @@
+.main__sidebar
+{
+    height: 100vh;
+    width: 14vw;
+    background-color: white;
+    border-right: 2px solid #EDF5FE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow-y: hidden;
+    font-family: 'Poppins';
+}
+.sidebar__logo
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Poppins';
+    margin-top: 2rem;
+    font-weight: 510;
+    margin-bottom: 2rem;
+}
+.sidebar__header
+{
+    width: 100%;
+}
+.sidebar__navigation
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.control__button__container
+{
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.control__button
+{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    gap: 0.8rem;
+    color: #707070;
+    height: 2rem;
+}
+
+.logout__button
+{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+    height: 2rem;
+    color: #CF3636;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
