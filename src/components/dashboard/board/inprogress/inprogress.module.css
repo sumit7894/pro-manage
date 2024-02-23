@@ -1,0 +1,11 @@
+.inprogress__main
+{
+    width: 22rem;
+    background-color: #EEF2F5;
+    font-size: 8rem;
+    height: calc(100vh - 9rem);
+    overflow-y: auto;
+    margin-right: 1rem;
+    white-space: nowrap;
+    overflow-x: hidden;
+}

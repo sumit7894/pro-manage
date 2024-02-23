@@ -1,0 +1,23 @@
+.backlog__main
+{
+    width: 20rem;
+    background-color: #EEF2F5;
+    /* font-size: 8rem; */
+    height: calc(100vh - 9rem);
+    overflow-y: auto;
+    margin-right: 1rem;
+    white-space: nowrap;
+    overflow-x: hidden;
+    font-family: 'Poppins';
+    border-radius: 10px;
+}
+.backlog__container
+{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+.backlog__heading
+{
+    font-size: 1.2rem;
+    font-weight: 510;
+}
