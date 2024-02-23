@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useTaskContext from '../../../../../hooks/useTaskContext';
+import axios from 'axios';
+import { BASE_URL } from '../../../../../utils/constants/constant';
 
 function TaskForm() {
 //   const [taskTitle, setTaskTitle] = useState('');
@@ -10,12 +12,13 @@ function TaskForm() {
 //   const [dueDate,setDueDate] = useState();
 
     const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
-    checklists,setChecklists,checklistInputRef,countCompletedTask,setCountCompletedTask} = useTaskContext();
+    checklists,setChecklists,checklistInputRef,countCompletedTask,
+    setCountCompletedTask,dueDate,setDueDate} = useTaskContext();
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
   };
-  const data ={taskTitle,selectedPriority,checklists,countCompletedTask}
-  console.log(data);
+  
+
   const handlePriorityChange = (priority) => {
     setSelectedPriority(priority);
   };
@@ -39,19 +42,24 @@ function TaskForm() {
     }
   };
 
-  const handleSubmitTask = (e) => {
+  const handleSubmitTask = async(e) => {
     e.preventDefault();
-
+    const userId = localStorage.getItem('userId');
+    const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
+    console.log(data);
     
-    console.log('Task:', {
-      title: taskTitle,
-      priority: selectedPriority,
-      checklists,
-    });
+    try {
+        const response = await axios.post(`${BASE_URL}/user/task`,data);
+        console.log(response);
+    } catch (error) {
+        
+    }
 
     setTaskTitle('');
     setSelectedPriority('Low');
     setChecklists([]);
+    setCountCompletedTask(0);
+    setDueDate("");
   };
 
   useEffect(() => {
@@ -67,7 +75,7 @@ function TaskForm() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmitTask}>
+    <form>
       <h2>Create Task</h2>
       <div>
         <label htmlFor="taskTitle">Task Title:</label>
@@ -138,7 +146,12 @@ function TaskForm() {
           </button>
         </div>
       ))}
-      <input type='date' placeholder='Due Date'/>
+      <input type='date'
+      placeholder='Due Date'
+      value={dueDate}
+      onChange={(e)=>setDueDate(e.target.value)}
+      />
+      <button onClick={handleSubmitTask}>Submit</button>
       </form>
    );
 } 

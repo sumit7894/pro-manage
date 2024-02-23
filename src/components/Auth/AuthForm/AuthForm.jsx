@@ -71,10 +71,12 @@ const AuthForm = () => {
     try {
       const response = await axios.post(`${BASE_URL}/login`,data);
       toast.success("Login successful!")
-      const name = response?.data?.data?.name
+      const name = response?.data?.data?.name;
+      const userId = response?.data?.data?.id;
       localStorage.setItem('email', email);
       localStorage.setItem('name', name);
-    
+      localStorage.setItem('userId',userId);
+      console.log(userId);
       setTimeout(()=>{
         navigate('/dashboard');
       },2000)
