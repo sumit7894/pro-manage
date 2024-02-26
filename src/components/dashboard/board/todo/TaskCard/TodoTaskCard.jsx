@@ -9,10 +9,13 @@ import toast,{ Toaster } from 'react-hot-toast'
 const TodoTaskCard = ({card,task,isExpanded, onToggle}) => {
   const [showDropDown,setDropDown] = useState(false);
   const {setEditTask,setTaskTitle,setSelectedPriority,setChecklists,
-  setCountCompletedTask,setDueDate} = useTaskContext();
+  setCountCompletedTask,setDueDate,setShowDeleteTask,setTaskId} = useTaskContext();
   const priorityColor = findColor(card.priority);
   
-    
+  const handleDelete =()=>{
+    setShowDeleteTask(true);
+    setTaskId(card._id);
+  }
 
   const handleShare =()=>{
     const textToCopy = `http://localhost:3000/dashboard/user/${card._id}`; 
