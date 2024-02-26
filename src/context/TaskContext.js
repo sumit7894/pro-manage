@@ -6,13 +6,15 @@ const Provider = ({children})=>{
     const [isAuthenticated,setIsAuthenticated] = useState();
     const [selectedMenu,setSelectedMenu] = useState(1);
     const [showCreateTask,setShowCreateTask] = useState(false);
-
+    const [showEditTask,setEditTask] = useState(false);
     const [taskTitle, setTaskTitle] = useState('');
   const [selectedPriority, setSelectedPriority] = useState('Low');
   const [checklists, setChecklists] = useState([]);
   const checklistInputRef = useRef(null); 
   const [countCompletedTask,setCountCompletedTask] = useState(0);
   const [dueDate,setDueDate] = useState();
+  const [category,setCategory] = useState("todo");
+  const [task,setTask] = useState();
 const value = 
 {
 selectedMenu,
@@ -21,6 +23,8 @@ isAuthenticated,
 setIsAuthenticated,
 showCreateTask,
 setShowCreateTask,
+showEditTask,
+setEditTask,
 taskTitle,
 setTaskTitle,
 selectedPriority,
@@ -31,7 +35,11 @@ checklistInputRef,
 countCompletedTask,
 setCountCompletedTask,
 dueDate,
-setDueDate
+setDueDate,
+task,
+setTask,
+category,
+setCategory
 }
 return (<TaskContext.Provider value={value}>{children}</TaskContext.Provider>)
 };

@@ -4,16 +4,14 @@ import axios from 'axios';
 import { BASE_URL } from '../../../../../utils/constants/constant';
 
 function TaskForm() {
-//   const [taskTitle, setTaskTitle] = useState('');
-//   const [selectedPriority, setSelectedPriority] = useState('Low');
-//   const [checklists, setChecklists] = useState([]);
-//   const checklistInputRef = useRef(null); 
-//   const [countCompletedTask,setCountCompletedTask] = useState(0);
-//   const [dueDate,setDueDate] = useState();
 
     const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
     checklists,setChecklists,checklistInputRef,countCompletedTask,
-    setCountCompletedTask,dueDate,setDueDate} = useTaskContext();
+    setCountCompletedTask,dueDate,setDueDate,task,setTask,setShowCreateTask,category} = useTaskContext();
+  
+  useEffect(()=>{
+    
+  },[setTask])
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
   };
@@ -45,9 +43,11 @@ function TaskForm() {
   const handleSubmitTask = async(e) => {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
-    const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
+    const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate,category}
+    console.log("this is data",data);
+    setTask((prevState) => [...prevState, data]);
     console.log(data);
-    
+    setShowCreateTask(false);
     try {
         const response = await axios.post(`${BASE_URL}/user/task`,data);
         console.log(response);

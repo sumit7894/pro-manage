@@ -43,7 +43,6 @@
     display: flex;
     /* width: 100%; */
     width: 100vw;
-    background-color: green;
 }
 .task__container
 {
@@ -51,5 +50,4 @@
     display: flex;
     overflow-x: auto;
     margin-left: 2rem;
-    background-color: red;
 }

@@ -10,11 +10,11 @@
     font-family: 'Poppins';
     display: flex;
     justify-content: center;
+    border-radius: 10px;
 }
 .todo__container
 {
     width: 90%;
-    /* background-color: green; */
     margin-top: 1rem;
 }
 .todo__header
@@ -22,6 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1rem;
 }
 .header__controller
 {
@@ -33,11 +34,11 @@
 }
 .todo__create__button
 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-right: 1rem;
     cursor: pointer;
 }
 .todo__minimize__button
 {
-    font-size: 2rem;
+    cursor: pointer;
 }

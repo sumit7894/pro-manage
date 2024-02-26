@@ -1,24 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useTaskContext from '../../../../../hooks/useTaskContext';
+import axios from 'axios';
+import { BASE_URL } from '../../../../../utils/constants/constant';
 
 function EditForm() {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [selectedPriority, setSelectedPriority] = useState('Low'); // Default priority
-  const [checklists, setChecklists] = useState();
-  const checklistInputRef = useRef(null); // Ref for checklist input
-  const [countCompletedTask,setCountCompletedTask] = useState(0);
-  const [dueDate,setDueDate] = useState();
+
+    const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
+    checklists,setChecklists,checklistInputRef,countCompletedTask,
+    setCountCompletedTask,dueDate,setDueDate,task,setTask,setShowCreateTask} = useTaskContext();
+  
+  useEffect(()=>{
+    
+  },[task])
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
   };
-  const data ={taskTitle,selectedPriority,checklists,countCompletedTask}
-  console.log(data);
+  
+
   const handlePriorityChange = (priority) => {
     setSelectedPriority(priority);
   };
 
   const handleAddChecklist = () => {
-    setChecklists([...checklists, { text: '' }]); // Add an empty checklist object
-    // checklistInputRef.current.focus(); // Focus on the input immediately
+    setChecklists([...checklists, { text: '' }]); 
   };
 
   const handleChecklistInputChange = (index, e) => {
@@ -31,21 +35,30 @@ function EditForm() {
     const updatedChecklists = [...checklists];
     updatedChecklists.splice(index, 1);
     setChecklists(updatedChecklists);
+    if(checklists[index].checked){
+        setCountCompletedTask((prev)=>prev-1)
+    }
   };
 
-  const handleSubmitTask = (e) => {
+  const handleSubmitTask = async(e) => {
     e.preventDefault();
-
-    // Send task data to backend (replace with your API integration)
-    console.log('Task:', {
-      title: taskTitle,
-      priority: selectedPriority,
-      checklists,
-    });
+    const userId = localStorage.getItem('userId');
+    const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
+    setTask((prevState) => [...prevState, data]);
+    console.log(data);
+    setShowCreateTask(false);
+    try {
+        const response = await axios.post(`${BASE_URL}/user/task`,data);
+        console.log(response);
+    } catch (error) {
+        
+    }
 
     setTaskTitle('');
     setSelectedPriority('Low');
     setChecklists([]);
+    setCountCompletedTask(0);
+    setDueDate("");
   };
 
   useEffect(() => {
@@ -61,7 +74,7 @@ function EditForm() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmitTask}>
+    <form>
       <h2>Create Task</h2>
       <div>
         <label htmlFor="taskTitle">Task Title:</label>
@@ -109,7 +122,6 @@ function EditForm() {
         <div key={index} className="checklist-item">
           <input
             type="checkbox"
-            // Add a checked prop for initial empty checklists
             checked={item.checked || false}
             onChange={() => {
               if(!item.checked){
@@ -126,14 +138,18 @@ function EditForm() {
             type="text"
             value={item.text}
             onChange={(e) => handleChecklistInputChange(index, e)}
-            required
           />
           <button type="button" onClick={() => handleChecklistDelete(index)}>
             Delete
           </button>
         </div>
       ))}
-      <input type='date' placeholder='Due Date'/>
+      <input type='date'
+      placeholder='Due Date'
+      value={dueDate}
+      onChange={(e)=>setDueDate(e.target.value)}
+      />
+      <button onClick={handleSubmitTask}>Submit</button>
       </form>
    );
 } 
