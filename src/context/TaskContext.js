@@ -15,7 +15,7 @@ const Provider = ({children})=>{
   const checklistInputRef = useRef(null); 
   const [countCompletedTask,setCountCompletedTask] = useState(0);
   const [dueDate,setDueDate] = useState();
-  const [category,setCategory] = useState("todo");
+  const [category,setCategory] = useState("TO-DO");
   const [task,setTask] = useState();
 const value = 
 {

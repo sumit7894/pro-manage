@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styles from './todo.module.css'
 import useTaskContext from '../../../../hooks/useTaskContext'
-import TodoTaskCard from './TaskCard/TodoTaskCard';
+import TaskCard from '../TaskCard/TaskCard';
 import COLLAPSE_IMG from '../../../../utils/assests/collapse.png'
 const Todo = () => {
-    const {showCreateTask,setShowCreateTask,task,setTask}
+    const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
     const handleCreateButton =()=>{
@@ -50,9 +50,9 @@ const Todo = () => {
             </div>
         <div className={styles.card__container}>
         {task
-          ?.filter(task => task.category === "todo")
+          ?.filter(task => task.category === "TO-DO")
           ?.map(item => (
-            <TodoTaskCard card={item} task={task}
+            <TaskCard card={item} task={task}
             isExpanded={expandedCards.includes(item._id)}
             onToggle={() => handleToggle(item._id)}
             />

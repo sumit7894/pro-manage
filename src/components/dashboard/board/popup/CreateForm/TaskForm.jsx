@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import useTaskContext from '../../../../../hooks/useTaskContext';
 import axios from 'axios';
 import { BASE_URL } from '../../../../../utils/constants/constant';
-
+import ReactDatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 function TaskForm() {
 
     const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
@@ -44,7 +45,6 @@ function TaskForm() {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
     const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate,category}
-    console.log("this is data",data);
     setTask((prevState) => [...prevState, data]);
     console.log(data);
     setShowCreateTask(false);
@@ -146,10 +146,11 @@ function TaskForm() {
           </button>
         </div>
       ))}
-      <input type='date'
-      placeholder='Due Date'
-      value={dueDate}
-      onChange={(e)=>setDueDate(e.target.value)}
+      <ReactDatePicker
+      selected={dueDate}
+      onChange={(date)=>setDueDate(date)}
+      placeholderText='Select Due Date'
+      dateFormat="MM/dd/yyyy"
       />
       <button onClick={handleSubmitTask}>Submit</button>
       </form>

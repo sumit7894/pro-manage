@@ -14,7 +14,6 @@
 .backlog__container
 {
     width: 90%;
-    /* background-color: green; */
     margin-top: 1rem;
 }
 .backlog__header
@@ -31,7 +30,7 @@
 {
     font-weight: 510;
 }
-.backlog__create__button
+.todo__create__button
 {
     font-size: 2rem;
     margin-right: 1rem;

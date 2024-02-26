@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './backlog.module.css'
 import useTaskContext from '../../../../hooks/useTaskContext';
-import BacklogTaskCard from './BacklogTaskCard/BacklogTaskCard';
+import TaskCard from '../TaskCard/TaskCard';
 const Backlog = () => {
-  const {task,setTask} = useTaskContext();
+  const {setShowCreateTask,task}
+     = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-
     console.log("task in todo",task);
     useEffect(()=>{
 
@@ -41,9 +41,9 @@ const Backlog = () => {
         </div>
     <div className={styles.card__container}>
     {task
-      ?.filter(task => task.category === "backlog")
+      ?.filter(task => task.category === "BACKLOG")
       ?.map(item => (
-        <BacklogTaskCard card={item} task={task}
+        <TaskCard card={item} task={task}
         isExpanded={expandedCards.includes(item._id)}
         onToggle={() => handleToggle(item._id)}
         />

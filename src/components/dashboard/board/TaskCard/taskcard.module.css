@@ -117,11 +117,11 @@
 }
 .card__date
 {
-    background-color: #DBDBDB;
-    color: #5A5A5A;
     border-radius: 8px;
+    width: 3.8rem;
+    border: 12px;
+    cursor: pointer;
     font-size: 0.7rem;
-    width: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -152,7 +152,8 @@
     justify-content: center;
     cursor: pointer;
     margin-right: 5px;
-    height: 1.2rem;
-    width: 3.8rem;
+    /* height: 1.2rem; */
+    /* width: 3.8rem; */
+    border: 5px solid #EEECEC;
     border-radius: 6px;
 }

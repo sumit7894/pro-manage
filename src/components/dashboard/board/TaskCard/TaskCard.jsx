@@ -1,19 +1,27 @@
 import React, {  useState } from 'react'
-import styles from './todocard.module.css'
+import styles from './taskcard.module.css'
 import axios from 'axios'
-import { BASE_URL, findColor } from '../../../../../utils/constants/constant'
-import useTaskContext from '../../../../../hooks/useTaskContext'
-import ARROW_DOWN_IMG from '../../../../../utils/assests/arrow-down.png'
-import ARROW_UP_IMG from '../../../../../utils/assests/arrow-up.png'
+import { BASE_URL, compareDate, findColor, getFormattedDate } from '../../../../utils/constants/constant'
+import useTaskContext from '../../../../hooks/useTaskContext'
+import ARROW_DOWN_IMG from '../../../../utils/assests/arrow-down.png'
+import ARROW_UP_IMG from '../../../../utils/assests/arrow-up.png'
 import toast,{ Toaster } from 'react-hot-toast'
-const TodoTaskCard = ({card,task,isExpanded, onToggle}) => {
+const TaskCard = ({card,task,isExpanded, onToggle}) => {
   const [showDropDown,setDropDown] = useState(false);
+  const allCategories = ['BACKLOG', 'TO-DO', 'PROGRESS', 'DONE'];
+
+  const dueDateStatus = compareDate(card?.dueDate);
+  
+  const formattedDueDate = getFormattedDate(card?.dueDate);
+
   const {setEditTask,setTaskTitle,setSelectedPriority,setChecklists,
   setCountCompletedTask,setDueDate,setShowDeleteTask,setTaskId} = useTaskContext();
-  const priorityColor = findColor(card.priority);
+  const priorityColor = findColor(card?.priority);
   
+  const filteredCategories = allCategories.filter((cat) => cat !== card?.category);
   const handleDelete =()=>{
     setShowDeleteTask(true);
+    setDropDown(false);
     setTaskId(card._id);
   }
 
@@ -24,17 +32,17 @@ const TodoTaskCard = ({card,task,isExpanded, onToggle}) => {
       .then(() => {
         toast.success("Link copied");
       })
+      setDropDown(false);
   }
   
   const handleEdit =()=>{
     setEditTask(true);
     const title = card?.title;
     const count = card?.countCompletedTask;
-    const totalChecklist = card?.checklists?.length;
     setTaskTitle(title);
     setSelectedPriority(card.priority);
     setChecklists(card.checklists);
-    setCountCompletedTask(card.countCompletedTask);
+    setCountCompletedTask(count);
     setDueDate(card.dueDate);
   }
   const handleMoveTask = async(category,taskId)=>{
@@ -109,27 +117,29 @@ const TodoTaskCard = ({card,task,isExpanded, onToggle}) => {
   </div>
 ))}
       <div className={styles.card__footer}>
-        <div className={styles.card__date}>
-          date
-        </div>
+        {card?.dueDate ? (<div className={styles.card__date}
+        style={{backgroundColor: dueDateStatus ? "#DBDBDB" : "#CF3636",
+        color: dueDateStatus ? "#5A5A5A":"#FFFFFF"
+        }}
+        >
+        {formattedDueDate}
+        </div>)
+        :(<div className={styles.empty__box}> </div>)
+        }
         <div className={styles.card__footer__controls}>
-          <div className={styles.category__button}
-          onClick={()=>handleMoveTask('backlog',card._id)}
-          >BACKLOG</div>
-          <div className={styles.category__button}
-          onClick={()=>handleMoveTask('inprogress',card._id)}
-          >
-            PROGRESS
-          </div>
-          <div className={styles.category__button}
-          onClick={()=>handleMoveTask('done',card._id)}
-          >
-            DONE
-          </div>
+          {filteredCategories.map((cat)=>(
+            <div className={styles.category__button}
+            onClick={()=>handleMoveTask(
+            cat
+            ,card._id)}
+            >
+              {cat}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   )
 }
 
-export default TodoTaskCard
+export default TaskCard

@@ -7,7 +7,6 @@ import { BASE_URL } from '../../../../../utils/constants/constant'
 const DeleteTask = () => {
     const {setShowDeleteTask,taskId} = useTaskContext();
     const handleDelete = async()=>{
-        // const data={taskId}
         try {
             const response = await axios.delete(`
             ${BASE_URL}/user/task/delete/
