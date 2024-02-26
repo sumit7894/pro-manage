@@ -2,10 +2,42 @@
 {
     width: 22rem;
     background-color: #EEF2F5;
-    font-size: 8rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
     height: calc(100vh - 9rem);
     overflow-y: auto;
     margin-right: 1rem;
     white-space: nowrap;
     overflow-x: hidden;
+    font-family: 'Poppins';
+}
+.backlog__container
+{
+    width: 90%;
+    margin-top: 1rem;
+}
+.backlog__header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__controller
+{
+    display: flex;
+}
+.backlog__heading
+{
+    font-weight: 510;
+}
+.todo__create__button
+{
+    font-size: 2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+.todo__minimize__button
+{
+    font-size: 2rem;
 }
