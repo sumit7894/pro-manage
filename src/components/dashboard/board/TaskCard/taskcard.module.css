@@ -81,6 +81,7 @@
     margin-top: 1rem;
     font-size: 1.2rem;
     font-weight: 510;
+    cursor: default;
 }
 .checklist__container
 {

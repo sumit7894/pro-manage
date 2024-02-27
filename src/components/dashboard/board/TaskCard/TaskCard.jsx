@@ -30,6 +30,13 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
     setTaskId,
   } = useTaskContext();
   const priorityColor = findColor(card?.priority);
+  const maxTitleChar = 25;
+  const title = card?.title;
+  const count = card?.countCompletedTask;
+  const totalChecklist = card?.checklists?.length;
+
+  const isOverMax = title?.length > maxTitleChar;
+  const truncatedTitle = isOverMax ? title.slice(0, maxTitleChar) + '...' : title;
 
   const filteredCategories = allCategories.filter(
     (cat) => cat !== card?.category
@@ -74,11 +81,6 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
       console.log(error);
     }
   };
-
-  // useState(() => {}, [task]);
-  const title = card?.title;
-  const count = card?.countCompletedTask;
-  const totalChecklist = card?.checklists?.length;
   return (
     <div className={styles.card__container}>
       <Toaster />
@@ -112,7 +114,11 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
           </div>
         )}
       </div>
-      <div className={styles.card__title}>{title}</div>
+      <h2 className={styles.card__title}
+      title={title}
+      >
+      {truncatedTitle}
+      </h2>
       <div className={styles.checklist__container}>
         Checklist ({count}/{totalChecklist})
         <div className={styles.toggle__button} onClick={onToggle}>

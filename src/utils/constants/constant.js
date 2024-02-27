@@ -1,9 +1,8 @@
 import { format } from "date-fns"
 
-export const BASE_URL = "http://localhost:3002"
+export const BASE_URL = "https://pro-manage-backend-nd28.onrender.com"
 
 export const findColor = (priority)=>{
-    // console.log()
     if(priority ==="High"){
         return "#FF2473"
     }else if(priority ==="Moderate"){
