@@ -57,6 +57,7 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
   };
 
   const handleEdit = () => {
+    setTaskId(card._id);
     setEditTask(true);
     const title = card?.title;
     const count = card?.countCompletedTask;
@@ -65,6 +66,7 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
     setChecklists(card.checklists);
     setCountCompletedTask(count);
     setDueDate(card.dueDate);
+    setDropDown(false);
   };
   const handleMoveTask = async (category, taskId) => {
     try {

@@ -5,12 +5,12 @@ import { BASE_URL } from '../../../../../utils/constants/constant';
 import ReactDatePicker from 'react-datepicker';
 import styles from './editform.module.css'
 import DELETE_IMG from '../../../../../utils/assests/delete.png'
-import { Toaster } from 'react-hot-toast';
+import toast,{ Toaster } from 'react-hot-toast';
 function EditForm() {
 
   const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
   checklists,setChecklists,checklistInputRef,countCompletedTask,
-  setCountCompletedTask,dueDate,setDueDate,task,setTask,setShowCreateTask} = useTaskContext();
+  setCountCompletedTask,dueDate,setDueDate,task,setTask,setEditTask,taskId} = useTaskContext();
   
   useEffect(()=>{
     
@@ -40,17 +40,42 @@ function EditForm() {
   };
 
   const handleEditTask = async(e) => {
-    e.preventDefault();
-    const userId = localStorage.getItem('userId');
-    const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
+    if(!(selectedPriority&&taskTitle))
+    {
+      toast.error("Please enter all necessary fields!");
+      return;
+    }
+    if(!checklists.length){
+      toast.error("Please create atleast 1 checklist!");
+      return;
+    }
+    let flag = false;
+    checklists.forEach((item) => {
+      if (!item?.text) {
+          toast.error("Please fill in all checklists");
+          flag =true; // Exit the function here if the condition is met
+      }
+      // Rest of your code (will not execute if the condition is true)
+      // ...
+  });
+    if(flag){
+      return;
+    }
+    const _id = taskId;
+    const data ={_id,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
     setTask((prevState) => [...prevState, data]);
-    console.log(data);
-    setShowCreateTask(false);
     try {
-        const response = await axios.put(`${BASE_URL}/user/task`,data);
-        console.log(response);
+        const response = await axios.patch(`${BASE_URL}/user/task/edit`,data);
+        if(response?.data?.success === true)
+        {
+          toast.success("Task updated successfully")
+        }else{
+          toast("Somthing went wrong. Please try again!")
+        }
+        setEditTask(false);
     } catch (error) {
-        
+      toast.error("Somthing went wrong");
+        console.log(error);
     }
 
     setTaskTitle('');
@@ -73,7 +98,7 @@ function EditForm() {
   }, []);
 
   return (
-    <form>
+    <form onSubmit={(e)=>e.preventDefault()}>
       <Toaster/>
       <div className={styles.title__input__container}>
         <label>Title <span className={styles.star}> *</span></label>
@@ -139,7 +164,6 @@ function EditForm() {
             value={item.text}
             placeholder='Add a task'
             onChange={(e) => handleChecklistInputChange(index, e)}
-            required
           />
           <img src={DELETE_IMG} 
           onClick={() => handleChecklistDelete(index)}
@@ -166,7 +190,7 @@ function EditForm() {
       />
       <div className={styles.footer__controller}>
       <button className={styles.cancel__button}
-      onClick={()=>setShowCreateTask(false)}
+      onClick={()=>setEditTask(false)}
       >
       Cancel
       </button>
