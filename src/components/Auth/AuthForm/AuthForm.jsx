@@ -70,13 +70,17 @@ const AuthForm = () => {
     const data ={email,password};
     try {
       const response = await axios.post(`${BASE_URL}/login`,data);
-      toast.success("Login successful!")
+      if(response?.status === 200)
+      {
+        toast.success("Login successful!")
+      }
       const name = response?.data?.data?.name;
       const userId = response?.data?.data?.id;
+      const token = response?.data?.data?.token;
       localStorage.setItem('email', email);
-      localStorage.setItem('name', name);
       localStorage.setItem('userId',userId);
-      console.log(userId);
+      localStorage.setItem('token',token);
+      localStorage.setItem('name', name);
       setTimeout(()=>{
         navigate('/dashboard');
       },2000)

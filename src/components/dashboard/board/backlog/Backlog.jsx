@@ -6,15 +6,14 @@ const Backlog = () => {
   const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-    console.log("task in todo",task);
     useEffect(()=>{
 
     },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>
-        prevExpanded.includes(cardId)
-          ? prevExpanded.filter((id) => id !== cardId)
+        prevExpanded?.includes(cardId)
+          ? prevExpanded?.filter((id) => id !== cardId)
           : [...prevExpanded, cardId]
       );
     };
@@ -41,10 +40,10 @@ const Backlog = () => {
         </div>
     <div className={styles.card__container}>
     {task
-      ?.filter(task => task.category === "BACKLOG")
+      ?.filter(task => task?.category === "BACKLOG")
       ?.map(item => (
         <TaskCard card={item} task={task}
-        isExpanded={expandedCards.includes(item._id)}
+        isExpanded={expandedCards?.includes(item._id)}
         onToggle={() => handleToggle(item._id)}
         />
       ))}

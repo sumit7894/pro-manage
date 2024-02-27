@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import useTaskContext from '../../../../../hooks/useTaskContext';
 import axios from 'axios';
 import { BASE_URL } from '../../../../../utils/constants/constant';
+import ReactDatePicker from 'react-datepicker';
 
 function EditForm() {
 
-    const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
-    checklists,setChecklists,checklistInputRef,countCompletedTask,
-    setCountCompletedTask,dueDate,setDueDate,task,setTask,setShowCreateTask} = useTaskContext();
+  const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
+  checklists,setChecklists,checklistInputRef,countCompletedTask,
+  setCountCompletedTask,dueDate,setDueDate,task,setTask,setShowCreateTask} = useTaskContext();
   
   useEffect(()=>{
     
@@ -48,7 +49,7 @@ function EditForm() {
     console.log(data);
     setShowCreateTask(false);
     try {
-        const response = await axios.post(`${BASE_URL}/user/task`,data);
+        const response = await axios.put(`${BASE_URL}/user/task`,data);
         console.log(response);
     } catch (error) {
         
@@ -144,10 +145,11 @@ function EditForm() {
           </button>
         </div>
       ))}
-      <input type='date'
-      placeholder='Due Date'
-      value={dueDate}
-      onChange={(e)=>setDueDate(e.target.value)}
+      <ReactDatePicker
+      selected={dueDate}
+      onChange={(date)=>setDueDate(date)}
+      placeholderText='Select Due Date'
+      dateFormat="MM/dd/yyyy"
       />
       <button onClick={handleSubmitTask}>Submit</button>
       </form>

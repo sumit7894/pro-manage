@@ -6,15 +6,14 @@ const InProgress = () => {
   const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-    console.log("task in todo",task);
     useEffect(()=>{
 
     },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>
-        prevExpanded.includes(cardId)
-          ? prevExpanded.filter((id) => id !== cardId)
+        prevExpanded?.includes(cardId)
+          ? prevExpanded?.filter((id) => id !== cardId)
           : [...prevExpanded, cardId]
       );
     };
@@ -40,10 +39,10 @@ const InProgress = () => {
         </div>
     <div className={styles.card__container}>
     {task
-      ?.filter(task => task.category === "PROGRESS")
+      ?.filter(task => task?.category === "PROGRESS")
       ?.map(item => (
         <TaskCard card={item} task={task}
-        isExpanded={expandedCards.includes(item._id)}
+        isExpanded={expandedCards?.includes(item._id)}
         onToggle={() => handleToggle(item._id)}
         />
       ))}

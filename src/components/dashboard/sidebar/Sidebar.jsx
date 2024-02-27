@@ -7,7 +7,7 @@ import SETTINS_IMG from '../../../utils/assests/setting.png'
 import useTaskContext from '../../../hooks/useTaskContext'
 import LOGOUT_IMG from '../../../utils/assests/logout.png'
 const Sidebar = () => {
-  const {selectedMenu,setSelectedMenu} = useTaskContext();
+  const {selectedMenu,setSelectedMenu,setShowLogout} = useTaskContext();
   return (
     <div className={styles.main__sidebar}>
       <div className={styles.sidebar__header}>
@@ -48,7 +48,9 @@ const Sidebar = () => {
 
       </div>
       </div>
-      <div className={styles.logout__button}>
+      <div className={styles.logout__button}
+      onClick={()=>setShowLogout(true)}
+      >
         <img src={LOGOUT_IMG} alt='logout'/>
         Log out
       </div>

@@ -7,9 +7,12 @@ import Done from './done/Done';
 import useTaskContext from '../../../hooks/useTaskContext';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/constants/constant';
+import { format } from 'date-fns';
 const Board = () => {
-  const name = localStorage.getItem('name');
-  const {task,setTask} = useTaskContext();
+  const {task,setTask,setShow} = useTaskContext();
+  const currentDate = new Date();
+  const formattedDate = format(currentDate,"do MMMM yyyy");
+  const name = localStorage.getItem("name");
   useEffect(()=>{
     fetchTask();
   },[task])
@@ -17,7 +20,6 @@ const Board = () => {
     try 
     {
       const userId = localStorage.getItem('userId');
-      console.log({userId});
     const response = await axios.get(`${BASE_URL}/user/alltask`,{
       params: {
         userId: userId
@@ -37,7 +39,7 @@ const Board = () => {
           Welcome! {name}
         </div>
         <div className={styles.board__date}>
-          12th Jan 2024
+          {formattedDate}
         </div>
         <div className={styles.board__header}>
           <div className={styles.board__heading}>

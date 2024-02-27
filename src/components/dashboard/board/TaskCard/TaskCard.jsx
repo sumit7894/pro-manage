@@ -64,14 +64,18 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
       const data = { taskId, category };
       const response = await axios.patch(
         `${BASE_URL}/user/category/update`,
-        data
+        data,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+      }
       );
-      console.log(data);
-      console.log(response);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  useState(() => {}, [task]);
+  // useState(() => {}, [task]);
   const title = card?.title;
   const count = card?.countCompletedTask;
   const totalChecklist = card?.checklists?.length;

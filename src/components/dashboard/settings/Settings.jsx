@@ -29,11 +29,14 @@ const Settings = () => {
     if(newError.nameError ==="" && newError.newPassError ==="" && newError.oldPassError ===""){
         const email = localStorage.getItem("email");
         const data ={name,email,oldPassword,newPassword}
-        console.log(data);
         try {
-            const response = await axios.patch(`${BASE_URL}/user/update`,data);
-            console.log(response);
+            const response = await axios.patch(`${BASE_URL}/user/update`,data,{
+              headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              }
+            });
             toast.success(response.data.message);
+            localStorage.setItem('name', response?.data?.data?.name);
             setName("");
             setOldPassword("");
             setNewPassword("");

@@ -10,7 +10,12 @@ const DeleteTask = () => {
         try {
             const response = await axios.delete(`
             ${BASE_URL}/user/task/delete/
-            `,{data:{taskId}})
+            `,{
+            data:{taskId},
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              }
+        })
             toast.success("Task Deleted Successfully");
             setTimeout(()=>{
                 setShowDeleteTask(false);

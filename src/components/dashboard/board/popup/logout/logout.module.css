@@ -1,0 +1,55 @@
+.popup__overlay
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.logout__main
+{
+    height: 45%;
+    width: 40%;
+    background-color: white;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins';
+}
+.logout__heading
+{
+    font-weight: 510;
+    font-size: 1.5rem;
+    margin-bottom: 2.8rem;
+}
+.logout__main button
+{
+    width: 85%;
+    height: 18%;
+    cursor: pointer;
+    border-radius: 12px;
+    font-weight: 510;
+    font-size: 1.6rem;
+}
+.logout__button
+{
+    margin-bottom: 1rem;
+    color: white;
+    background-color: #17A2B8;
+    border: none;
+}
+.cancel__button
+{
+
+    cursor: pointer;
+    color: #CF3636;
+    border: 1px solid #CF3636;
+    background-color: white;
+}

@@ -10,15 +10,14 @@ const Todo = () => {
     const handleCreateButton =()=>{
         setShowCreateTask(true);
     }
-    console.log("task in todo",task);
     useEffect(()=>{
 
     },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>
-        prevExpanded.includes(cardId)
-          ? prevExpanded.filter((id) => id !== cardId)
+        prevExpanded?.includes(cardId)
+          ? prevExpanded?.filter((id) => id !== cardId)
           : [...prevExpanded, cardId]
       );
     };
@@ -50,7 +49,7 @@ const Todo = () => {
             </div>
         <div className={styles.card__container}>
         {task
-          ?.filter(task => task.category === "TO-DO")
+          ?.filter(task => task?.category === "TO-DO")
           ?.map(item => (
             <TaskCard card={item} task={task}
             isExpanded={expandedCards.includes(item._id)}

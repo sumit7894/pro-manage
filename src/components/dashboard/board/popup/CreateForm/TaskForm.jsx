@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../../../../utils/constants/constant';
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import toast,{ Toaster } from 'react-hot-toast';
 function TaskForm() {
 
     const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
@@ -46,13 +47,21 @@ function TaskForm() {
     const userId = localStorage.getItem('userId');
     const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate,category}
     setTask((prevState) => [...prevState, data]);
-    console.log(data);
     setShowCreateTask(false);
     try {
-        const response = await axios.post(`${BASE_URL}/user/task`,data);
-        console.log(response);
+        const response = await axios.post(`${BASE_URL}/user/task`,data,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+      });
+      console.log(response);
+      toast.success(response?.data?.message);
     } catch (error) {
-        
+      if(error?.response?.status === 401){
+        toast.error(error?.response?.statusText);
+      }else{
+        toast.error("Somthing went wrong");
+      }
     }
 
     setTaskTitle('');
@@ -77,6 +86,7 @@ function TaskForm() {
   return (
     <form>
       <h2>Create Task</h2>
+      <Toaster/>
       <div>
         <label htmlFor="taskTitle">Task Title:</label>
         <input
