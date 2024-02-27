@@ -12,7 +12,7 @@ const Provider = ({children})=>{
   const [showLogout,setShowLogout] = useState(false);
   const [taskId,setTaskId] = useState();
   const [taskTitle, setTaskTitle] = useState('');
-  const [selectedPriority, setSelectedPriority] = useState('Low');
+  const [selectedPriority, setSelectedPriority] = useState();
   const [checklists, setChecklists] = useState([]);
   const checklistInputRef = useRef(null); 
   const [countCompletedTask,setCountCompletedTask] = useState(0);

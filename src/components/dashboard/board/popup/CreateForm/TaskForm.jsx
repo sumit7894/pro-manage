@@ -5,6 +5,8 @@ import { BASE_URL } from '../../../../../utils/constants/constant';
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import toast,{ Toaster } from 'react-hot-toast';
+import styles from './createform.module.css'
+import DELETE_IMG from '../../../../../utils/assests/delete.png'
 function TaskForm() {
 
     const {taskTitle,setTaskTitle,selectedPriority,setSelectedPriority,
@@ -18,11 +20,6 @@ function TaskForm() {
     setTaskTitle(e.target.value);
   };
   
-
-  const handlePriorityChange = (priority) => {
-    setSelectedPriority(priority);
-  };
-
   const handleAddChecklist = () => {
     setChecklists([...checklists, { text: '' }]); 
   };
@@ -85,53 +82,52 @@ function TaskForm() {
 
   return (
     <form>
-      <h2>Create Task</h2>
       <Toaster/>
-      <div>
-        <label htmlFor="taskTitle">Task Title:</label>
+      <div className={styles.title__input__container}>
+        <label>Title <span className={styles.star}> *</span></label>
         <input
           type="text"
           id="taskTitle"
           value={taskTitle}
+          className={styles.title__inputbox}
           onChange={handleTaskTitleChange}
+          placeholder='Enter Task Title'
           required
         />
       </div>
-      <div>
-        <label>Priority:</label>
+      <div className={styles.priority__container}>
+        <label>Select Priority<span className={styles.star}> *</span></label>
         <button
           type="button"
-          onClick={() => handlePriorityChange('High')}
-          className={selectedPriority === 'High' ? 'active' : ''}
+          onClick={()=>setSelectedPriority("High")}
+          style={{backgroundColor: selectedPriority === 'High' ? "#EEECEC" : "white"}}
         >
-          High
+          HIGH PRIORITY
         </button>
         <button
           type="button"
-          onClick={() => handlePriorityChange('Moderate')}
-          className={selectedPriority === 'Moderate' ? 'active' : ''}
+          onClick={() => setSelectedPriority("Moderate")}
+          style={{backgroundColor: selectedPriority === 'Moderate' ? "#EEECEC" : "white"}}
         >
-          Moderate
+          MODERATE PRIORITY
         </button>
         <button
           type="button"
-          onClick={() => handlePriorityChange('Low')}
-          className={selectedPriority === 'Low' ? 'active' : ''}
+          onClick={() => setSelectedPriority("Low")}
+          style={{backgroundColor: selectedPriority === 'Low' ? "#EEECEC" : "white"}}
         >
-          Low
+          LOW PRIORITY
         </button>
       </div>
-      <p>
-        Checklist Completion: {countCompletedTask}/{checklists.length}
-      </p>
-      <div>
-        <button type="button" onClick={handleAddChecklist}>
-          Add Checklist Item
-        </button>
+      <div className={styles.checklist__status}>
+        Checklist ({countCompletedTask}/{checklists.length})
+        <span className={styles.star}> *</span>
       </div>
+      <div className={styles.checklist__container}>
       {checklists.map((item, index) => (
-        <div key={index} className="checklist-item">
+        <div key={index}  className={styles.checklist__item}> 
           <input
+            className={styles.checklist__checkbox}
             type="checkbox"
             checked={item.checked || false}
             onChange={() => {
@@ -147,22 +143,45 @@ function TaskForm() {
           />
           <input
             type="text"
+            className={styles.checklist__inputbox}
             value={item.text}
+            placeholder='Add a task'
             onChange={(e) => handleChecklistInputChange(index, e)}
             required
           />
-          <button type="button" onClick={() => handleChecklistDelete(index)}>
-            Delete
-          </button>
+          <img src={DELETE_IMG} 
+          onClick={() => handleChecklistDelete(index)}
+          alt='delete'
+          />
         </div>
       ))}
+      </div>
+      <div>
+        <button type="button" 
+        onClick={handleAddChecklist}
+        className={styles.add__task__button}
+        >
+          <span>+</span> Add New
+        </button>
+      </div>
+      <div className={styles.form__footer}>
       <ReactDatePicker
       selected={dueDate}
       onChange={(date)=>setDueDate(date)}
       placeholderText='Select Due Date'
       dateFormat="MM/dd/yyyy"
+      className={styles.date__input}
       />
-      <button onClick={handleSubmitTask}>Submit</button>
+      <div className={styles.footer__controller}>
+      <button className={styles.cancel__button}
+      onClick={()=>setShowCreateTask(false)}
+      >
+      Cancel
+      </button>
+      <button className={styles.submit__button}
+      onClick={handleSubmitTask}>Submit</button>
+      </div>
+      </div>
       </form>
    );
 } 

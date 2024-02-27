@@ -13,8 +13,11 @@
 }
 .create__task__main
 {
-    height: 80%;
-    width: 50%;
+    height: 70%;
+    width: 40%;
     background-color: white;
     border-radius: 22px;
+    padding: 1.5rem;
+    font-family: 'Poppins';
+    position: relative;
 }
