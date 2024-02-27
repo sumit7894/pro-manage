@@ -15,6 +15,14 @@ function EditForm() {
   useEffect(()=>{
     
   },[setTask])
+  const handleCancel =()=>{
+    setEditTask(false);
+    setTaskTitle('');
+    setSelectedPriority('');
+    setChecklists([]);
+    setCountCompletedTask(0);
+    setDueDate("");
+  }
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
   };
@@ -39,7 +47,7 @@ function EditForm() {
     }
   };
 
-  const handleEditTask = async(e) => {
+  const handleEditTask = async() => {
     if(!(selectedPriority&&taskTitle))
     {
       toast.error("Please enter all necessary fields!");
@@ -53,10 +61,8 @@ function EditForm() {
     checklists.forEach((item) => {
       if (!item?.text) {
           toast.error("Please fill in all checklists");
-          flag =true; // Exit the function here if the condition is met
+          flag =true; 
       }
-      // Rest of your code (will not execute if the condition is true)
-      // ...
   });
     if(flag){
       return;
@@ -65,7 +71,12 @@ function EditForm() {
     const data ={_id,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate}
     setTask((prevState) => [...prevState, data]);
     try {
-        const response = await axios.patch(`${BASE_URL}/user/task/edit`,data);
+        const response = await axios.patch(`${BASE_URL}/user/task/edit`,
+        data,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        });
         if(response?.data?.success === true)
         {
           toast.success("Task updated successfully")
@@ -79,7 +90,7 @@ function EditForm() {
     }
 
     setTaskTitle('');
-    setSelectedPriority('Low');
+    setSelectedPriority('');
     setChecklists([]);
     setCountCompletedTask(0);
     setDueDate("");
@@ -190,7 +201,7 @@ function EditForm() {
       />
       <div className={styles.footer__controller}>
       <button className={styles.cancel__button}
-      onClick={()=>setEditTask(false)}
+      onClick={handleCancel}
       >
       Cancel
       </button>

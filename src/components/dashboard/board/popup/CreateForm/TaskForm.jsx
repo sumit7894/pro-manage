@@ -16,6 +16,14 @@ function TaskForm() {
   useEffect(()=>{
     
   },[setTask])
+  const handleCancel =()=>{
+    setShowCreateTask(false);
+    setTaskTitle('');
+    setSelectedPriority('');
+    setChecklists([]);
+    setCountCompletedTask(0);
+    setDueDate("");
+  }
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
   };
@@ -39,8 +47,26 @@ function TaskForm() {
     }
   };
 
-  const handleSubmitTask = async(e) => {
-    e.preventDefault();
+  const handleSubmitTask = async() => {
+    if(!(selectedPriority&&taskTitle))
+    {
+      toast.error("Please enter all necessary fields!");
+      return;
+    }
+    if(!checklists.length){
+      toast.error("Please create atleast 1 checklist!");
+      return;
+    }
+    let flag = false;
+    checklists.forEach((item) => {
+      if (!item?.text) {
+          toast.error("Please fill in all checklists");
+          flag =true; 
+      }
+  });
+    if(flag){
+      return;
+    }
     const userId = localStorage.getItem('userId');
     const data ={userId,taskTitle,selectedPriority,checklists,countCompletedTask,dueDate,category}
     setTask((prevState) => [...prevState, data]);
@@ -81,7 +107,7 @@ function TaskForm() {
   }, []);
 
   return (
-    <form>
+    <form onSubmit={(e)=>e.preventDefault()}>
       <Toaster/>
       <div className={styles.title__input__container}>
         <label>Title <span className={styles.star}> *</span></label>
@@ -174,7 +200,7 @@ function TaskForm() {
       />
       <div className={styles.footer__controller}>
       <button className={styles.cancel__button}
-      onClick={()=>setShowCreateTask(false)}
+      onClick={handleCancel}
       >
       Cancel
       </button>
