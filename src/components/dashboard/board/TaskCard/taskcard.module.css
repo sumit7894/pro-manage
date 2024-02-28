@@ -115,6 +115,7 @@
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
 }
 .card__date
 {
@@ -130,6 +131,7 @@
 .card__footer__controls
 {
     display: flex;
+    
 }
 .toggle__button
 {
