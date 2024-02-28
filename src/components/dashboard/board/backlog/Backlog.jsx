@@ -6,9 +6,7 @@ const Backlog = () => {
   const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-    useEffect(()=>{
-
-    },[task])
+    
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>

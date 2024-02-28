@@ -10,9 +10,6 @@ const Todo = () => {
     const handleCreateButton =()=>{
         setShowCreateTask(true);
     }
-    useEffect(()=>{
-
-    },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>

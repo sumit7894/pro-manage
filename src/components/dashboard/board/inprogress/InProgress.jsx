@@ -6,9 +6,9 @@ const InProgress = () => {
   const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-    useEffect(()=>{
+    // useEffect(()=>{
 
-    },[task])
+    // },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>

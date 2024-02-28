@@ -9,10 +9,7 @@
     overflow-y: hidden;
     width:98%;
 }
-.board__container
-{
-    /* background-color: red; */
-}
+
 .welcome__heading
 {
     font-weight: 510;
@@ -31,20 +28,46 @@
     display: flex;
     justify-content: space-between;
     margin-left: 2rem;
+    position: relative;
 }
 .board__heading
 {
     font-size: 1.6rem;
     font-weight: 510;
+    border: none;
+    outline: none;
 }
-.board__controller
-{
 
+.selected__value
+{
+    font-weight: 400;
+    font-family: 'Poppins';
+    color: black;
+    cursor: pointer;
+}
+.selected__value img
+{
+    margin-left: 0.5rem;
+}
+.dropdown__menu
+{
+    position: absolute;
+    height: 5rem;
+    width: 8rem;
+    bottom: 1rem;
+    right: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 12px;
 }
 .task__board
 {
     display: flex;
-    /* width: 100%; */
     width: 100vw;
 }
 .task__container

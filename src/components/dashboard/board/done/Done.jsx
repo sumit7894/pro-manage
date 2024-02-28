@@ -7,9 +7,9 @@ const Done = () => {
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-    },[task])
+    // },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>
