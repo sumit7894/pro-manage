@@ -1,6 +1,8 @@
 .baord__root
 {
     height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .main__board
 {
@@ -65,6 +67,7 @@
     cursor: pointer;
     border-radius: 12px;
 }
+
 .task__board
 {
     display: flex;

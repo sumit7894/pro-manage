@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import TaskContext from "../context/TaskContext";
 
-const  useTaskContext= () => {
+const useTaskContext = () => {
   return useContext(TaskContext);
 };
 export default useTaskContext;

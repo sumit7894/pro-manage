@@ -36,7 +36,9 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
   const totalChecklist = card?.checklists?.length;
 
   const isOverMax = title?.length > maxTitleChar;
-  const truncatedTitle = isOverMax ? title.slice(0, maxTitleChar) + '...' : title;
+  const truncatedTitle = isOverMax
+    ? title.slice(0, maxTitleChar) + "..."
+    : title;
 
   const filteredCategories = allCategories.filter(
     (cat) => cat !== card?.category
@@ -48,7 +50,7 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
   };
 
   const handleShare = () => {
-    const textToCopy = `http://localhost:3000/dashboard/task/${card._id}`;
+    const textToCopy = `https://pro-manage-y6hy.onrender.com/dashboard/task/${card._id}`;
 
     navigator.clipboard.writeText(textToCopy).then(() => {
       toast.success("Link copied");
@@ -73,11 +75,12 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
       const data = { taskId, category };
       const response = await axios.patch(
         `${BASE_URL}/user/category/update`,
-        data,{
-          headers:{
+        data,
+        {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-          }
-      }
+          },
+        }
       );
     } catch (error) {
       console.log(error);
@@ -102,6 +105,7 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
             ...
           </div>
         </div>
+        {/*----------------- Dropdown menu to for edit delete share ------------------*/}
         {showDropDown && (
           <div className={styles.card__dropdown__menu}>
             <div onClick={handleEdit} className={styles.edit__button}>
@@ -116,10 +120,8 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
           </div>
         )}
       </div>
-      <h2 className={styles.card__title}
-      title={title}
-      >
-      {truncatedTitle}
+      <h2 className={styles.card__title} title={title}>
+        {truncatedTitle}
       </h2>
       <div className={styles.checklist__container}>
         Checklist ({count}/{totalChecklist})
@@ -131,15 +133,16 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
           )}
         </div>
       </div>
+      {/*-------------------- All the checklists with toggle feature ---------------------*/}
       {isExpanded &&
         card?.checklists?.map((item, index) => (
           <div className={styles.card__checklist} key={item._id}>
             <input
               type="checkbox"
-              className={styles.checklist__text}
+              className={styles.checklist__checkbox}
               checked={item?.checked}
             />
-            <div>{item.text}</div>
+            <div className={styles.checklist__text}>{item.text}</div>
           </div>
         ))}
       <div className={styles.card__footer}>
@@ -155,21 +158,22 @@ const TaskCard = ({ card, task, isExpanded, onToggle }) => {
               >
                 {formattedDueDate}
               </div>
-            ) : 
-            (
+            ) : (
               <div
-              className={styles.card__date}
-              style={{
-                backgroundColor:"#63C05B",
-                color:"white"
-              }}
-              >{formattedDueDate}</div>
-            )
-            }
+                className={styles.card__date}
+                style={{
+                  backgroundColor: "#63C05B",
+                  color: "white",
+                }}
+              >
+                {formattedDueDate}
+              </div>
+            )}
           </>
         ) : (
           <div className={styles.empty__box}></div>
         )}
+        {/*---------------- Buttons to move the card in different category --------------------*/}
         <div className={styles.card__footer__controls}>
           {filteredCategories.map((cat) => (
             <div

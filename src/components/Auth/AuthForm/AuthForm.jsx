@@ -86,10 +86,12 @@ const AuthForm = () => {
       },2000)
     } catch (error) {
       console.log(error);
-      if(error.response.status === 401){
-        toast.error(error.response.data.message)
+      if(error?.response?.status === 401){
+        toast.error(error?.response?.data.message)
       }
-      
+      else{
+        toast.error("Somthing went wrong");
+      }
     }
   }
   return (

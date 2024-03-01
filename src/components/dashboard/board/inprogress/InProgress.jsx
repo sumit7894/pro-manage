@@ -6,9 +6,6 @@ const InProgress = () => {
   const {setShowCreateTask,task}
      = useTaskContext();
     const [expandedCards, setExpandedCards] = useState([]);
-    // useEffect(()=>{
-
-    // },[task])
 
     const handleToggle = (cardId) => {
       setExpandedCards((prevExpanded) =>
@@ -23,9 +20,9 @@ const InProgress = () => {
     };
   return (
     <div className={styles.inprogress__main}>
-    <div className={styles.backlog__container}>
-        <div className={styles.backlog__header}>
-        <span className={styles.backlog__heading}>
+    <div className={styles.inprogress__container}>
+        <div className={styles.inprogress__header}>
+        <span className={styles.inprogress__heading}>
             In Progress
         </span>
 
@@ -38,6 +35,7 @@ const InProgress = () => {
         </div>
         </div>
     <div className={styles.card__container}>
+{/*----------- rendering the cards whose cateogory in progress ------------*/}
     {task
       ?.filter(task => task?.category === "PROGRESS")
       ?.map(item => (
