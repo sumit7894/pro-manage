@@ -34,7 +34,7 @@ const AuthForm = () => {
     newError.nameError = checkName(name);
     newError.emailError = checkEmail(email);
     newError.passwordError = checkPassword(password);
-
+    console.log('hello')
     newError.confirmPasswordError = checkConfirmPassword(
       password,
       confirmPassword
