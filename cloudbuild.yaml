@@ -1,0 +1,15 @@
+options:
+     logging: CLOUD_LOGGING_ONLY 
+steps:
+  # Deploy to Server App Engine
+  - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'server'  # Specifies the working directory for this step
+    args: ['app', 'deploy', 'app.yaml', '--quiet']
+
+  # Deploy to App Engine
+  - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'client'  # Specifies the working directory for this step
+    args: ['app', 'deploy', 'app.yaml', '--quiet']
+
+substitutions:
+  _ZONE: asia-south2
